@@ -6,9 +6,9 @@ class Tableau_Server(object):
     
     """docstring for ClassName"""
     def __init__(self,username, password,site_id,url, https = False):
-        super().__init__() # http://stackoverflow.com/questions/576169/understanding-python-super-with-init-methods
+        super().__init__() 
 
-        # authorize 
+        # authentification
         tableau_auth = TSC.TableauAuth("hveron", 'h@veron21', site_id='')
         server = TSC.Server('http://172.24.1.174/')
         server.add_http_options({'verify': https}) # if not https server skip warnings

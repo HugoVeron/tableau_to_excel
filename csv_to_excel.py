@@ -19,7 +19,7 @@ def csv_excel(sheet):
     place_valeur = 0
 
     #extracts the information from target 
-    with open("tableau_to_excel/target.csv", 'r') as targets :
+    with open("target.csv", 'r') as targets :
         for lines in targets :
             line = lines.split(",")
             if (line[0] == sheet) :

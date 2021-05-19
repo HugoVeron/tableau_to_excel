@@ -1,5 +1,8 @@
 # -*- coding: iso-8859-1 -*-
 import re
+
+
+#to replace the characters that does not convert well to the excel format
 def replace_csv(path) :
 # open your csv and read as a text string
     with open (path,"r") as file :
@@ -49,6 +52,8 @@ def replace_csv(path) :
     with open(path, 'w') as file:
         file.write(my_csv_text)
 
+
+#to keep only the integer in a string 
 def keep_int(string) :
     new_string = ""
     for char in string :
