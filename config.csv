@@ -1,0 +1,2 @@
+nom_sheet,valeur_target_bad|valeur_target_good,validation_up_down,target,colonne1|colonne2|...|colonnen,ligne1|ligne2|...|lignen,attribut1|attribut2|...|attributn
+WPS_ACPower,90.00|99.95,up,valeur,Year of DAY|Month of DAY,Site ID(Office)|Site Name,valeur|Calcul 1

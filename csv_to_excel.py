@@ -78,9 +78,9 @@ def csv_excel(sheet):
                 workbook_sheet.write(i,j, data[j][i],cell_format_blue)
             else :
                 workbook_sheet.write(i,j, data[j][i])
-        if (i!=0) :
+        if (i!=0 and j == place_valeur) :
             if ( target[2] == "up") :
-                if (data[j][i] == "no value") :
+                if (data[place_valeur][i] == "no value") :
                     workbook_sheet.write(i,place_valeur, data[place_valeur][i],cell_format_blue)
                 else :
                     if ( float(data[place_valeur][i].strip('%')) > float(target[1])  ):
@@ -92,7 +92,7 @@ def csv_excel(sheet):
                     else :
                         workbook_sheet.write(i,place_valeur, data[place_valeur][i],cell_format_black)
             elif ( target[2] == "down") :
-                if (data[j][i] == "no value") :
+                if (data[place_valeur][i] == "no value") :
                     workbook_sheet.write(i,place_valeur, data[place_valeur][i],cell_format_blue)
                 else :
                     if ( float(data[place_valeur][i].strip('%')) < float(target[1])  ):
