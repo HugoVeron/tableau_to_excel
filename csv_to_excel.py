@@ -115,8 +115,3 @@ def csv_excel(sheet):
         workbook_sheet.set_column(j,j,length_max_data[j])
 
     workbook.close()
-
-
-
-print("blablabla je rajoute du code jiji")
-print ("blabla deux je check si je suis bien dans dvlpmtn")
