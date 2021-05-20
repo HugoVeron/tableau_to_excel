@@ -18,4 +18,4 @@ for i in range (len(list_workbooks)) :
     if (i!=0) :
         dl.download(list_workbooks[i],list_sheets[i])
         cte.csv_excel(list_sheets[i])
-        ctec.csv_excel_crosstab()
+        ctec.csv_excel_crosstab(list_sheets[i])
