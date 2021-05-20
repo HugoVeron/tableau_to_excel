@@ -2,7 +2,11 @@
 import xlsxwriter
 import char_replace
 
-
+# create the workbook in which we write 
+def create_excel (path_excel) :
+    workbook = xlsxwriter.Workbook(path_excel)
+    workbook_sheet = workbook.add_worksheet()
+    return(workbook_sheet,workbook_sheet)
 #traitement du fichier config
 def config_traitement(sheet) : 
     config = []
@@ -65,18 +69,35 @@ def recup_column(config,data) :
             if data[place_column[i]][j] != 'All' :
                 if not (data[place_column[i]][j] in column_uni[i]) :
                     column_uni[i] += [data[place_column[i]][j]]
-    print (column_uni)
+    return(column_uni)
 
+
+#create the title of the columns of the excel sheet
+def write_column_excel(workbook_sheet,column_uni) :
+    prec = 1
+    nb_elem_columns = []
+    for i in range(len(column_uni)) :
+        nb_elem_columns += [len(column_uni[i])]
+    count_column = 0
+    for i in range(len(nb_elem_columns)):
+        for j in range(len(column_uni[i])) :
+            workbook_sheet.write(0,1,"aa" )
+            print(column_uni[i])
+    print(workbook_sheet)
 
 #the function to call to create the excel from the csv
 def csv_excel_crosstab(sheet) :
     path_csv = sheet + ".csv"
     path_excel = sheet + ".xlsx"
     char_replace.replace_csv(path_csv)
+
+    #creation of the excel file
+    workbook_sheet,workbook = create_excel(path_excel)
+
     workbook = xlsxwriter.Workbook(path_excel)
     workbook_sheet = workbook.add_worksheet()
-
     config = config_traitement(sheet)
     data = recup_data(path_csv)[0]
     length_max_data = recup_data(path_csv)[1]
-    test_recup_column = recup_column(config,data)
+    column_uni = recup_column(config,data)
+    write_column_excel(workbook_sheet,column_uni)
