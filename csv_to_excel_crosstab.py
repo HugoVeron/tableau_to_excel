@@ -6,7 +6,7 @@ import char_replace
 def create_excel (path_excel) :
     workbook = xlsxwriter.Workbook(path_excel)
     workbook_sheet = workbook.add_worksheet()
-    return(workbook_sheet,workbook_sheet)
+    return(workbook_sheet,workbook)
 #traitement du fichier config
 def config_traitement(sheet) : 
     config = []
@@ -81,7 +81,7 @@ def write_column_excel(workbook_sheet,column_uni) :
     count_column = 0
     for i in range(len(nb_elem_columns)):
         for j in range(len(column_uni[i])) :
-            workbook_sheet.write(0,1,"aa" )
+            workbook_sheet.write(i,j,"bb" )
             print(column_uni[i])
     print(workbook_sheet)
 
@@ -94,10 +94,15 @@ def csv_excel_crosstab(sheet) :
     #creation of the excel file
     workbook_sheet,workbook = create_excel(path_excel)
 
-    workbook = xlsxwriter.Workbook(path_excel)
-    workbook_sheet = workbook.add_worksheet()
+
     config = config_traitement(sheet)
     data = recup_data(path_csv)[0]
     length_max_data = recup_data(path_csv)[1]
     column_uni = recup_column(config,data)
     write_column_excel(workbook_sheet,column_uni)
+    
+    #workbook_sheet.write(0,1,"aa")        
+    workbook.close()
+
+
+
