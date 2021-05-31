@@ -17,11 +17,5 @@ for i in range (len(list_workbooks)) :
     if (i!=0) :
         dl.download(list_workbooks[i],list_sheets[i])
         cte.csv_excel(list_sheets[i])
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-=======
         #ctec.csv_excel_crosstab(list_sheets[i])
->>>>>>> Stashed changes
-=======
-        #ctec.csv_excel_crosstab(list_sheets[i])
->>>>>>> Stashed changes
+
