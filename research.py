@@ -39,6 +39,21 @@ def recup_col_line_data(sheet) :
                 nom_data = line[1].strip('\n').strip(' ').split("|")
     return(nom_colonnes,nom_lignes,nom_data)
 
+def recup_indicateurs(sheet,nom_data) :
+    indic_dict = {} 
+    key = "init"
+    with open("target.csv", 'r') as file :
+        for lines in file:
+            line = lines.split(",")
+            if (line[0] == sheet) :
+                for item in line :
+                    print(item)
+                    if item in nom_data :
+                        key = item
+                        indic_dict[key] = []
+                    elif (""): 
+                        indic_dict[key] += [item]
+    return(indic_dict)
 
 def recup_data(path_csv) :
     with open(path_csv, "r") as file : 
@@ -96,7 +111,7 @@ def find_in_dic(dic, list) :
         
 
 
-def write_excel(data, length_max_data, nom_colonnes, nom_lignes, nom_data,place_colonnes, place_lignes, place_data) :
+def prepare_data(data, length_max_data, nom_colonnes, nom_lignes, nom_data,place_colonnes, place_lignes, place_data) :
     length_data = len(data[0])
     data_avec_col_lin = []
     id_colonnes = 0
@@ -135,7 +150,7 @@ def write_excel(data, length_max_data, nom_colonnes, nom_lignes, nom_data,place_
     return(data_avec_col_lin,colonnes,lignes)
 
 
-def excel_write(data_avec_col_lin, colonnes, lignes,workbook_sheet) :
+def write_excel(data_avec_col_lin, colonnes, lignes,workbook_sheet) :
 
     for key,value in colonnes.items() :
             for i in range (len(value)) :
@@ -152,7 +167,8 @@ def excel_write(data_avec_col_lin, colonnes, lignes,workbook_sheet) :
     for i in range(1,len(data_avec_col_lin)):
         for j in range (len(data_avec_col_lin[i])-2) :
             workbook_sheet.write(data_avec_col_lin[i][-2] + 1, j + (len(data_avec_col_lin[0])-2)*(data_avec_col_lin[i][-1] - 1), data_avec_col_lin[i][j])
-            print(data_avec_col_lin[i][j])
+
+
 def lancer(sheet) :
     
     path_csv = sheet + ".csv"
@@ -162,10 +178,11 @@ def lancer(sheet) :
     workbook_sheet,workbook = create_excel(path_excel)
 
     nom_colonnes, nom_lignes , nom_data= recup_col_line_data(sheet)
+    indic_dict = recup_indicateurs(sheet,nom_data)
     data , length_max_data = recup_data(path_csv)
     place_colonnes , place_lignes , place_data = place_col_lin_data(nom_colonnes, nom_lignes, nom_data, data)
-    data_avec_col_lin , colonnes , lignes = write_excel(data,length_max_data,nom_colonnes,nom_lignes,nom_data, place_colonnes, place_lignes, place_data)
-    excel_write(data_avec_col_lin,colonnes,lignes,workbook_sheet)
+    data_avec_col_lin , colonnes , lignes = prepare_data(data,length_max_data,nom_colonnes,nom_lignes,nom_data, place_colonnes, place_lignes, place_data)
+    write_excel(data_avec_col_lin,colonnes,lignes,workbook_sheet)
 
     #workbook_sheet.write(0,1,"aa")        
     workbook.close()

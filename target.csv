@@ -1,4 +1,4 @@
-sheet_name,valeur_target_bad,valeur_target_good,validation_up_down,nom_KPI
-WPS_ACPower,90.00,99.95,up,valeur
+sheet_name,nom_KPI,valeur_target_bad,valeur_target_good,validation_up_down
+WPS_ACPower,valeur,90.00,99.95,up
 
 
