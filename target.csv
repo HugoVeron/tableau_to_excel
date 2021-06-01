@@ -1,4 +1,4 @@
 sheet_name,valeur_target_bad,valeur_target_good,validation_up_down,nom_KPI
 WPS_ACPower,90.00,99.95,up,valeur
-LTE Latency (ms),20,10,down,LTE Latency (ms)
+
 

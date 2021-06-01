@@ -1,6 +1,4 @@
-import random
 import xlsxwriter
-import math
 outWorkbook = xlsxwriter.Workbook("out.xlsx")
 outsheet = outWorkbook.add_worksheet()
 
@@ -28,12 +26,3 @@ for i in range (3) :
         outsheet.write(i+1,1, values[i],cell_format2)
 
 outWorkbook.close()
-moy2 = 0
-for i in range (50) :
-    moy = 0
-    for i in range (50) : 
-        a = 250 +random.random()*50
-        moy += a
-    print(moy/50)
-    moy2 += moy/50
-print(moy2/50)
