@@ -55,6 +55,12 @@ def recup_indicateurs(sheet,nom_data) :
                         indic_dict[key] += [item]
     return(indic_dict)
 
+def place_indicateur(indic_dict,data_avec_lin_col) :
+    place_indic = indic_dict
+    for keys in indic_dict.keys() :
+        pass
+    return(place_indic)
+
 def recup_data(path_csv) :
     with open(path_csv, "r") as file : 
         for lines in file :
