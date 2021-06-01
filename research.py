@@ -114,26 +114,47 @@ def write_excel(data, length_max_data, nom_colonnes, nom_lignes, nom_data,place_
             current_lignes += [data[j][i]]
         for j in place_data :
             current_data += [data[j][i]]
-        data_avec_col_lin += current_data
-        if(find_in_dic(colonnes,current_colonnes)[0]) :
-            data_avec_col_lin += [id_colonnes]
-        else : 
-            id_colonnes += 1 
-            data_avec_col_lin += [id_colonnes]
-            colonnes[id_colonnes] = current_colonnes
+        data_avec_col_lin += [current_data]
+        
         if(find_in_dic(lignes,current_lignes)[0]) :
-            data_avec_col_lin += [id_lignes]
+            data_avec_col_lin[i] += [find_in_dic(lignes,current_lignes)[1]]
+
+            
         else : 
             id_lignes += 1 
             lignes[id_lignes] = current_lignes
-            data_avec_col_lin += [id_lignes]
+            data_avec_col_lin[i] += [id_lignes]
+
+        if(find_in_dic(colonnes,current_colonnes)[0]) :
+            data_avec_col_lin[i] += [find_in_dic(colonnes,current_colonnes)[1]]
+        else : 
+            id_colonnes += 1 
+            data_avec_col_lin[i] += [id_colonnes]
+            colonnes[id_colonnes] = current_colonnes
+        
     return(data_avec_col_lin,colonnes,lignes)
+
+
 def excel_write(data_avec_col_lin, colonnes, lignes,workbook_sheet) :
 
     for key,value in colonnes.items() :
             for i in range (len(value)) :
-                workbook_sheet.write(key,i,value[i])
+                if (key == 1) :
+                    workbook_sheet.write(i, (len(colonnes.get(1)) -1 + key), value[i])
+                else :
+                    for j in range (len(data_avec_col_lin[0])-2) :
+                        workbook_sheet.write(i, (len(colonnes.get(1)) -3 + key)*(len(data_avec_col_lin[0])-2)  + j , value[i])
+
+    for key,value in lignes.items() :
+        for i in range (len(value)) :
+            workbook_sheet.write(len(lignes.get(1)) -1 + key, i, value[i])
+
+    for i in range(1,len(data_avec_col_lin)):
+        for j in range (len(data_avec_col_lin[i])-2) :
+            workbook_sheet.write(data_avec_col_lin[i][-2] + 1, j + (len(data_avec_col_lin[0])-2)*(data_avec_col_lin[i][-1] - 1), data_avec_col_lin[i][j])
+            print(data_avec_col_lin[i][j])
 def lancer(sheet) :
+    
     path_csv = sheet + ".csv"
     path_excel = sheet + ".xlsx"
     char_replace.replace_csv(path_csv)
@@ -145,4 +166,9 @@ def lancer(sheet) :
     place_colonnes , place_lignes , place_data = place_col_lin_data(nom_colonnes, nom_lignes, nom_data, data)
     data_avec_col_lin , colonnes , lignes = write_excel(data,length_max_data,nom_colonnes,nom_lignes,nom_data, place_colonnes, place_lignes, place_data)
     excel_write(data_avec_col_lin,colonnes,lignes,workbook_sheet)
+
+    #workbook_sheet.write(0,1,"aa")        
+    workbook.close()
+
+
 lancer("WPS_ACPower")
