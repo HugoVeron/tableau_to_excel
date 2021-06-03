@@ -1,4 +1,17 @@
-import xlsxwriter
+list = []
+for i in range (5):
+    list+=[["0"]]
+print(list)
+
+
+
+
+
+
+
+
+
+"""import xlsxwriter
 outWorkbook = xlsxwriter.Workbook("out.xlsx")
 outsheet = outWorkbook.add_worksheet()
 
@@ -25,4 +38,4 @@ for i in range (3) :
     else :
         outsheet.write(i+1,1, values[i],cell_format2)
 
-outWorkbook.close()
+outWorkbook.close()"""
